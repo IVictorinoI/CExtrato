@@ -1,0 +1,28 @@
+{
+  "name": "desafio-se-c-extrato-movto-financ",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/loader.js",
+  "scripts": {
+    "dev": "nodemon",
+    "production": "pm2 start src/loader.js --name desafio-se-c-extrato-movto-financ"
+  },
+  "keywords": [],
+  "author": "Victor Matheus Mendes",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-query-int": "^3.0.0",
+    "mongoose": "^5.9.15",
+    "node-restful": "^0.2.6",
+    "pm2": "^4.4.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "engines": {
+    "node": ">=8.17.0"
+  }
+}

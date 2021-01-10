@@ -1,0 +1,145 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "A aplication for people",
+      "version": "v1",
+      "title": "C - Extrato - Clientes",
+      "license": {
+        "name": "Use under LICX",
+        "url": "https://github.com/IVictorinoI/"
+      },
+      "contact": {
+        "name": "Victor Matheus Mendes",
+        "email": "victormatheusmendes@hotmail.com",
+        "url": "https://github.com/IVictorinoI/"
+      }
+    },
+    "servers": [
+      {
+        "url": "/api/"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Customer Request",
+        "description": "Customer API"
+      }
+    ],
+    "paths": {
+      "/customer": {
+        "get": {
+          "tags": [
+            "Customer Request"
+          ],
+          "summary": "Returns customers",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/customer"
+              }
+            }
+          }
+        }
+      },
+      "/customer/{cpf}": {
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "description": "CPF of the cat that we want to match",
+            "type": "string"
+          }
+        ],
+        "put": {
+          "summary": "Create/update a customer",
+          "tags": [
+            "Customer Request"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "cpf",
+              "required": true,
+              "description": "CPF of People",
+              "schema": {
+                "$ref": "#/components/schemas/cpf"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Syncronize with people service",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/customer"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/customer"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "id": {
+          "properties": {
+            "uuid": {
+              "type": "string"
+            }
+          }
+        },
+        "cpf": {
+          "properties": {
+            "uuid": {
+              "type": "string"
+            }
+          }
+        },
+        "customer": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "string"
+            },
+            "name": {
+              "type": "string",
+              "format": "string"
+            },
+            "cpf": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        },
+        "customers": {
+          "type": "object",
+          "properties": {
+            "customer": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/customer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }

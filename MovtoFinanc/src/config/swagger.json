@@ -1,0 +1,208 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "A aplication for people",
+      "version": "v1",
+      "title": "C - Extrato - Movimentação financeira",
+      "license": {
+        "name": "Use under LICX",
+        "url": "https://github.com/IVictorinoI/"
+      },
+      "contact": {
+        "name": "Victor Matheus Mendes",
+        "email": "victormatheusmendes@hotmail.com",
+        "url": "https://github.com/IVictorinoI/"
+      }
+    },
+    "servers": [
+      {
+        "url": "/api/"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Movto Financ Request",
+        "description": "Movto Financ API"
+      }
+    ],
+    "paths": {
+      "/movtoFinanc?populate=customer": {
+        "get": {
+          "tags": [
+            "Movto Financ Request"
+          ],
+          "summary": "Returns movtoFinancs",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/movtoFinanc"
+              }
+            }
+          }
+        }
+      },
+      "/movtoFinanc": {
+        "post": {
+          "tags": [
+            "Movto Financ Request"
+          ],
+          "summary": "Create a new movtoFinanc request system",
+          "requestBody": {
+            "description": "Movto Financ Request Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/movtoFinanc"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "201": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        }
+      },
+      "/movtoFinanc/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the cat that we want to match",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Movto Financ Request"
+          ],
+          "summary": "Get movtoFinanc request with given ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "Movto Financ Request id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/movtoFinanc"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Movto Financ request not found."
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete MovtoFinanc Request by ID",
+          "tags": [
+            "Movto Financ Request"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "MovtoFinanc Request Id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. Asset Request not found."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "id": {
+          "properties": {
+            "uuid": {
+              "type": "string"
+            }
+          }
+        },
+        "cpf": {
+          "properties": {
+            "uuid": {
+              "type": "string"
+            }
+          }
+        },
+        "movtoFinanc": {
+          "type": "object",
+          "properties": {
+            "cpf": {
+              "type": "string",
+              "format": "string"
+            },
+            "type": {
+              "type": "string",
+              "format": "string",
+              "enum": [ "TRANSFER", "PAY", "RECEIVE", "DONATE"]
+            },
+            "inOrOut": {
+              "type": "string",
+              "format": "string",
+              "enum": [ "IN", "OUT"]
+            },
+            "value": {
+              "type": "number",
+              "format": "double"
+            },
+            "origin": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        },
+        "movtoFinancs": {
+          "type": "object",
+          "properties": {
+            "movtoFinanc": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/movtoFinanc"
+              }
+            }
+          }
+        }
+      }
+    }
+  }

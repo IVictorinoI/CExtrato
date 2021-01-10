@@ -1,0 +1,163 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "A aplication for people",
+      "version": "v1",
+      "title": "C - Extrato - Consulta de CPF",
+      "license": {
+        "name": "Use under LICX",
+        "url": "https://github.com/IVictorinoI/"
+      },
+      "contact": {
+        "name": "Victor Matheus Mendes",
+        "email": "victormatheusmendes@hotmail.com",
+        "url": "https://github.com/IVictorinoI/"
+      }
+    },
+    "servers": [
+      {
+        "url": "/api/"
+      }
+    ],
+    "tags": [
+      {
+        "name": "CPF Check Request",
+        "description": "CPF Check API"
+      }
+    ],
+    "paths": {
+      "/cpfCheck?populate=customer": {
+        "get": {
+          "tags": [
+            "CPF Check Request"
+          ],
+          "summary": "Returns cpfChecks",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/cpfCheck"
+              }
+            }
+          }
+        }
+      },
+      "/cpfCheck": {
+        "post": {
+          "tags": [
+            "CPF Check Request"
+          ],
+          "summary": "Create a new cpfCheck request system",
+          "requestBody": {
+            "description": "CPF Check Request Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cpfCheck"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "201": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        }
+      },
+      "/cpfCheck/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the cat that we want to match",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "CPF Check Request"
+          ],
+          "summary": "Get cpfCheck request with given ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "CPF Check Request id",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/cpfCheck"
+              }
+            },
+            "400": {
+              "description": "Failed. Misunderstood Request."
+            },
+            "404": {
+              "description": "Failed. CPF Check request not found."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "id": {
+          "properties": {
+            "uuid": {
+              "type": "string"
+            }
+          }
+        },
+        "cpf": {
+          "properties": {
+            "uuid": {
+              "type": "string"
+            }
+          }
+        },
+        "cpfCheck": {
+          "type": "object",
+          "properties": {
+            "cpf": {
+              "type": "string",
+              "format": "string"
+            },
+            "origin": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        },
+        "cpfChecks": {
+          "type": "object",
+          "properties": {
+            "cpfCheck": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/cpfCheck"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
