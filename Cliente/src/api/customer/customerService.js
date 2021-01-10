@@ -6,6 +6,17 @@ Customer.methods(['get', 'put'])
 Customer.updateOptions({new: true, runValidators: true})
 Customer.after('put', errorHandler)
 
+Customer.before('get', async(req, res, next) => {
+    if(req.query.cpf){
+        const customer = await Customer.findOne({ "cpf": { $regex: '.*' + req.query.cpf + '.*' } });
+        var zx = req.params.cpf;
+        res.json(customer._doc);
+        return;
+    }
+
+    next();
+});
+
 Customer.before('put', async(req, res, next) => {
 
     syncronizeCustomerService.getFromPeopleSystem(req.params.id, function(lista){
