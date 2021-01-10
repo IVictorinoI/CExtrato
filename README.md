@@ -12,6 +12,7 @@
 - Cada API é um pequeno sistema, cada serviço é extremamente rápido e funcionam independente um do outro
 - Para orquestrar o consumo destes sistemas e controlar autenticação e balanceanto de carga, foi criado o [Api Gateway](https://github.com/IVictorinoI/CExtrato/tree/main/Gateway) é nele que outros sistemas vão se conectar.
 - Podemos considerar estas APIS "nanoservicos"?
+- A API possui swagger.
 
 ## Tabelas (Ou Documentos por se tratar de Mongo):  
 - Cliente (Replicada do sistema A) (Id, Nome, Cpf) 
